@@ -28,6 +28,7 @@ const reducer = (store=initialState, action) => {
                 ...store,
                 users: [...store.users, action.payload]
             }
+        
         case 'REG_ADD_USER':      
         console.log(action.payload);
             return{

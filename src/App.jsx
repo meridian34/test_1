@@ -7,40 +7,39 @@ import { UserCard } from './components/UserCard';
 import { RegistrBlock } from './components/RegistrBlock';
 import { Grid, Card, Icon, Image , Button} from 'semantic-ui-react'
 import store from './store/store'
-
-
-
-const i = {
-  _id:12345678,
-  name:'',
-  time:0  
-};
-
+import { Route, BrowserRouter as Router, Switch, matchPath } from "react-router-dom";
+import { UserDetail } from './components/UserDetail';
 
 function App() {
   const dispatch = useDispatch();
   const users = useSelector(state => state.users);
   
   return (
+    <Router>
+      <Switch>
+        <Route path="/user/:id" children={<UserDetail/>}/>
+          
+        <Route path="/">
+          <div className="App">  
+          <div className="View">
+          <input className="Input" type="text" placeholder="Enter name"/> 
+            <div className="CardContainer">
+              {users.map(user=><UserCard props={user} />)}      
+            </div>
+          </div>
+          <div className="RightBar">
+            {<RegistrBlock/>}
+            <div className="WinnerBlock">
+                <h2>Total participants: {}</h2>
+                <button> Show winner </button>          
+            </div>
+          </div>
+        </div>
+        </Route>
+      </Switch>
+    </Router>
     
-    <div className="App">      
-
-      <div className="View">
-      <input className="Input" type="text" placeholder="Enter name"/> 
-        <div className="CardContainer">
-          {users.map(user=>UserCard(user))}      
-        </div>
-      </div>
-      <div className="RightBar">
-        {RegistrBlock()}
-        <div className="WinnerBlock">
-            <h2>Total participants: {}</h2>
-            <button> Show winner </button>          
-        </div>
-      </div>
-      
-      
-    </div>
+    
   );
 }
 
