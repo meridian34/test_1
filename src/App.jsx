@@ -9,6 +9,7 @@ import { Grid, Card, Icon, Image , Button} from 'semantic-ui-react'
 import store from './store/store'
 import { Route, BrowserRouter as Router, Switch, matchPath } from "react-router-dom";
 import { UserDetail } from './components/UserDetail';
+import { WinnerBlock } from './components/WinnerBlock';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,10 +30,8 @@ function App() {
           </div>
           <div className="RightBar">
             {<RegistrBlock/>}
-            <div className="WinnerBlock">
-                <h2>Total participants: {}</h2>
-                <button> Show winner </button>          
-            </div>
+            {console.log('aft')}
+            {<WinnerBlock/>}
           </div>
         </div>
         </Route>

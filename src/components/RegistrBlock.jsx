@@ -3,49 +3,14 @@ import {formatTime} from '../helpers/formatTime';
 import store from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const RegistrBlock =()=>{    
+export const RegistrBlock =(props)=>{    
     const dispatch = useDispatch();
     
-    let winner = useSelector(store => store.winner);
-    let regUser = useSelector(store => store.regUser);
+    const regUser = useSelector(store => store.regUser);
+    const winner = useSelector(store => store.winner);
+   
   
-   console.log(regUser);
-  
-
-   const handleChangeName = (e) =>{
-     regUser.name = e.target.value;
-     console.log(regUser);
-   }
-
-   const handleChangeSecname = (e) =>{
-    regUser.secname = e.target.value;
-    console.log(regUser);
-    }
-
-    const handleRegistrationClick = () =>{
-      console.log("regUser");
-      if(regUser.name !=="" && regUser.secname!=="")
-      {dispatch({type: 'REG_ADD_USER', payload: regUser})}
-   }
-
-   const handleChangeTime = (e) =>{
-     const i = parseInt(e.target.value);
-     if(Number.isInteger(i)){
-      regUser.time = i;
-     }
-    
-    console.log(regUser);
-    }
-
-   const handleTimeRegistrationClick = () =>{
-    console.log("regUserTime");
-    if(regUser.time>0){
-      dispatch({type: 'REG_ADD_TIME_USER', payload: regUser})
-    }
-  
- }
-
-    return (regUser.name == "" && regUser.secname == "") ? (
+    return winner == null ? (regUser == null ? (
         <div className="RegistrationBlock">
           <div className="TitleReg">
             <h2>Registration user</h2>
@@ -53,14 +18,16 @@ export const RegistrBlock =()=>{
           <div className="ContentReg">
             <div className="someContent" >
               <p>First name:</p>
-              <input className="InputName" type="text" placeholder="Enter first name" defaultValue={regUser.name} onChange={handleChangeName}/>
+              <input className="Input" type="text" placeholder="Enter first name" />
               <p>Second name:</p>
-              <input className="InputSurname" type="text" placeholder="Enter Second name" defaultValue={regUser.surname} onChange={handleChangeSecname}/>
+              <input className="Input" type="text" placeholder="Enter Second name" />
             </div>
           </div>
           <div className="BottomReg">
-            <button onClick={handleRegistrationClick}> Registration </button>
+            <button> Registration </button>
           </div>
+          
+          
         </div>
     ) : (
         <div className="RegistrationBlock">
@@ -69,14 +36,30 @@ export const RegistrBlock =()=>{
           </div>
           <div className="ContentReg">
             <div className="someContent" >
-              <p>Time:</p>
-              <input className="InputT" type="text" placeholder="Enter time" onChange={handleChangeTime} />              
+              <p>First name:</p>
+              <input className="Input" type="text" placeholder="Enter first name" />
+              <p>Second name:</p>
+              <input className="Input" type="text" placeholder="Enter Second name" />
             </div>
           </div>
           <div className="BottomReg">
-            <button onClick={handleTimeRegistrationClick}> Registration </button>
+            <button> Registration </button>
           </div>
+          
+          
         </div>
+    )) : (
+          <div className="RegistrationBlock">
+            <div className="TitleReg">
+            <h2>Registration user closed</h2>
+          </div>
+          <div className="ContentReg">
+            
+          </div>
+          <div className="BottomReg">
+            
+          </div>
+          </div>
     )
      
  
